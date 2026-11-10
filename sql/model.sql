@@ -96,8 +96,9 @@ SELECT
     coalesce(contract_nature, 'n/a') AS contract_nature,
     coalesce(procedure_type, 'n/a') AS procedure_type,
     framework,
-    n_offers,
-    n_offers = 1 AS single_offer,
+    -- 0, negative or e.g. 201872 offers are typos
+    CASE WHEN n_offers BETWEEN 1 AND 200 THEN n_offers END AS n_offers,
+    CASE WHEN n_offers BETWEEN 1 AND 200 THEN n_offers = 1 END AS single_offer,
     n_winners,
     winner_key,
     winner_name,
