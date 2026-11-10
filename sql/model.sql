@@ -1,5 +1,14 @@
 -- Star schema used by the notebooks and the Power BI report.
 
+-- buyer ids come as "5671783718", "nip: 5671783718", "5671783718<tab>"...
+-- power bi also compares keys case insensitive and ignores trailing whitespace
+CREATE OR REPLACE MACRO buyer_key(id, name) AS
+    CASE
+        WHEN length(regexp_replace(coalesce(id, ''), '\D', '', 'g')) = 10
+            THEN regexp_replace(id, '\D', '', 'g')
+        ELSE lower(regexp_replace(trim(coalesce(id, name)), '\s+', ' ', 'g'))
+    END;
+
 CREATE OR REPLACE TABLE ref_cpv AS
 SELECT * FROM read_csv('{REF}/cpv.csv', header = true, all_varchar = true);
 
@@ -32,7 +41,7 @@ SELECT 'n/a', 'Brak danych', 'Unknown';
 CREATE OR REPLACE TABLE dim_buyer AS
 WITH latest AS (
     SELECT
-        coalesce(buyer_id, buyer_name) AS buyer_key,
+        buyer_key(buyer_id, buyer_name) AS buyer_key,
         arg_max(buyer_name, publication_date) AS buyer_name,
         arg_max(buyer_legal_type, publication_date) AS legal_type,
         count(*) AS n_notices
@@ -60,7 +69,7 @@ WITH lots AS (
         n.publication_date::DATE AS publication_date,
         n.procedure_type,
         n.contract_nature,
-        coalesce(n.buyer_id, n.buyer_name) AS buyer_key,
+        buyer_key(n.buyer_id, n.buyer_name) AS buyer_key,
         CASE WHEN n.total_value_cur = l.value_cur THEN n.total_value END AS notice_total
     FROM raw_lots l
     JOIN raw_notices n USING (publication_number)
