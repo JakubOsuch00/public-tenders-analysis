@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+data/
+*.duckdb
+*.duckdb.wal
+
+# power bi local files
+powerbi/**/.pbi/localSettings.json
+powerbi/**/.pbi/cache.abf
