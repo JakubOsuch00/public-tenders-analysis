@@ -1,0 +1,39 @@
+table dim_cpv
+	lineageTag: 2bbedb6b-e5b1-4eb7-8068-4424f0f86d07
+
+	column cpv_division
+		dataType: string
+		lineageTag: 0e797a84-b056-47d8-b4fd-47d8d2f35b2f
+		summarizeBy: none
+		sourceColumn: cpv_division
+
+		annotation SummarizationSetBy = Automatic
+
+	column division_name_pl
+		dataType: string
+		lineageTag: 2d863e1b-c6d8-4eb6-86fb-4523dbc10b42
+		summarizeBy: none
+		sourceColumn: division_name_pl
+
+		annotation SummarizationSetBy = Automatic
+
+	column division_name_en
+		dataType: string
+		lineageTag: c150009c-d0a0-4146-9faf-abd2e87e3e1f
+		summarizeBy: none
+		sourceColumn: division_name_en
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_cpv = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_cpv.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"cpv_division", type text}, {"division_name_pl", type text}, {"division_name_en", type text}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

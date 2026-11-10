@@ -1,0 +1,24 @@
+relationship 6fd02316-2689-4305-802a-0c6a1a4c31c7
+	fromColumn: fact_lot.buyer_key
+	toColumn: dim_buyer.buyer_key
+
+relationship 0cb1d6db-605a-488f-badd-a50204c5aed8
+	fromColumn: fact_lot.winner_key
+	toColumn: dim_winner.winner_key
+
+relationship b62274e2-bf71-494c-8eaa-3f89bd0fe3ea
+	fromColumn: fact_lot.cpv_division
+	toColumn: dim_cpv.cpv_division
+
+relationship 148011f0-9a4f-42dc-a056-aea5f994e06a
+	fromColumn: fact_lot.cpv_group
+	toColumn: dim_cpv_group.cpv_group
+
+relationship 2b55e9a6-b0ad-432b-a3ee-92c390bdd7fd
+	fromColumn: fact_lot.nuts2
+	toColumn: dim_region.nuts2
+
+relationship 0c52232f-9032-4489-a92c-2f2e4681bd05
+	fromColumn: fact_lot.publication_date
+	toColumn: dim_date.date
+

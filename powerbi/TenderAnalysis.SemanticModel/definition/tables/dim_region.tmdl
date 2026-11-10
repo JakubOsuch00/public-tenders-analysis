@@ -1,0 +1,31 @@
+table dim_region
+	lineageTag: f61e36b3-623a-4694-9410-ecbdd7307d71
+
+	column nuts2
+		dataType: string
+		lineageTag: 463f6916-039b-4fd6-abb4-01bb6edbc962
+		summarizeBy: none
+		sourceColumn: nuts2
+
+		annotation SummarizationSetBy = Automatic
+
+	column voivodeship
+		dataType: string
+		lineageTag: 76518e01-56b2-484c-847e-7f738f55c63c
+		summarizeBy: none
+		sourceColumn: voivodeship
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_region = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_region.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"nuts2", type text}, {"voivodeship", type text}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

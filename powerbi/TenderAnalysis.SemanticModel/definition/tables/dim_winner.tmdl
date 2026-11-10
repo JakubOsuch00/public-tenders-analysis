@@ -1,0 +1,31 @@
+table dim_winner
+	lineageTag: 16f333c1-5c97-44ec-a9f8-a5b0456705f9
+
+	column winner_key
+		dataType: string
+		lineageTag: 61c8ae60-ea8b-418d-b9af-3b6eb17df9ab
+		summarizeBy: none
+		sourceColumn: winner_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_name
+		dataType: string
+		lineageTag: 71143d40-23fa-4b98-9e21-93dc56570c4a
+		summarizeBy: none
+		sourceColumn: winner_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_winner = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_winner.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"winner_key", type text}, {"winner_name", type text}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+

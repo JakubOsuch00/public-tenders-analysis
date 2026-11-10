@@ -1,0 +1,5 @@
+expression DataFolder = "C:\Users\PC\Desktop\public-tenders-analysis\data\powerbi\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 75a788a9-bccc-43c5-900f-96b8e63a3963
+
+	annotation PBI_ResultType = Text
+

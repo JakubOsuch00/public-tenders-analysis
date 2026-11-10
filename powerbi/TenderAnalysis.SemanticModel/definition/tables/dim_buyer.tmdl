@@ -1,0 +1,39 @@
+table dim_buyer
+	lineageTag: d14e4839-852f-413b-8070-087a658dc0a6
+
+	column buyer_key
+		dataType: string
+		lineageTag: a5d63de5-c37e-49ae-84be-60f3db30eb75
+		summarizeBy: none
+		sourceColumn: buyer_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column buyer_name
+		dataType: string
+		lineageTag: 20d0e21e-5c3f-442b-aa88-13c453b87c30
+		summarizeBy: none
+		sourceColumn: buyer_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column buyer_type
+		dataType: string
+		lineageTag: ee15bf76-7e80-4ce8-9d68-0095ff7c0d29
+		summarizeBy: none
+		sourceColumn: buyer_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_buyer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents(DataFolder & "dim_buyer.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				    Typed = Table.TransformColumnTypes(Headers, {{"buyer_key", type text}, {"buyer_name", type text}, {"buyer_type", type text}}, "en-US")
+				in
+				    Typed
+
+	annotation PBI_ResultType = Table
+
