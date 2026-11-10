@@ -1,0 +1,189 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "t_markets",
+  "position": {
+    "x": 20,
+    "y": 160,
+    "z": 0,
+    "width": 1880,
+    "height": 560,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_cpv_group"
+                    }
+                  },
+                  "Property": "group_name_en"
+                }
+              },
+              "queryRef": "dim_cpv_group.group_name_en",
+              "nativeQueryRef": "group_name_en"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_lot"
+                    }
+                  },
+                  "Property": "Total Value (bln PLN)"
+                }
+              },
+              "queryRef": "fact_lot.Total Value (bln PLN)",
+              "nativeQueryRef": "Total Value (bln PLN)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_lot"
+                    }
+                  },
+                  "Property": "Lots"
+                }
+              },
+              "queryRef": "fact_lot.Lots",
+              "nativeQueryRef": "Lots"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_lot"
+                    }
+                  },
+                  "Property": "Buyers"
+                }
+              },
+              "queryRef": "fact_lot.Buyers",
+              "nativeQueryRef": "Buyers"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_lot"
+                    }
+                  },
+                  "Property": "Avg Offers"
+                }
+              },
+              "queryRef": "fact_lot.Avg Offers",
+              "nativeQueryRef": "Avg Offers"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_lot"
+                    }
+                  },
+                  "Property": "Single Offer %"
+                }
+              },
+              "queryRef": "fact_lot.Single Offer %",
+              "nativeQueryRef": "Single Offer %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_lot"
+                    }
+                  },
+                  "Property": "Top Winner Share"
+                }
+              },
+              "queryRef": "fact_lot.Top Winner Share",
+              "nativeQueryRef": "Top Winner Share"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_lot"
+                    }
+                  },
+                  "Property": "Median Price to Estimate"
+                }
+              },
+              "queryRef": "fact_lot.Median Price to Estimate",
+              "nativeQueryRef": "Median Price to Estimate"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_lot"
+                  }
+                },
+                "Property": "Total Value (bln PLN)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": false
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Markets (CPV groups)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

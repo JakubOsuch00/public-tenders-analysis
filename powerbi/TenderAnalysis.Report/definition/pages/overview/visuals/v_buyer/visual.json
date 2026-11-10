@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "v_buyer",
+  "position": {
+    "x": 1140,
+    "y": 310,
+    "z": 0,
+    "width": 760,
+    "height": 300,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_buyer"
+                    }
+                  },
+                  "Property": "buyer_type"
+                }
+              },
+              "queryRef": "dim_buyer.buyer_type",
+              "nativeQueryRef": "buyer_type"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_lot"
+                    }
+                  },
+                  "Property": "Total Value (bln PLN)"
+                }
+              },
+              "queryRef": "fact_lot.Total Value (bln PLN)",
+              "nativeQueryRef": "Total Value (bln PLN)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Value by buyer type'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

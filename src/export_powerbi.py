@@ -11,7 +11,8 @@ QUERIES = {
     "fact_lot": """
         SELECT lot_key, publication_number, publication_date, buyer_key, winner_key,
                cpv_division, left(cpv, 3) AS cpv_group, nuts2, contract_nature, procedure_type,
-               framework, n_offers::INTEGER AS n_offers, single_offer,
+               framework, n_offers::INTEGER AS n_offers, least(n_offers, 10)::INTEGER AS offers_capped,
+               single_offer,
                round(value_pln, 2) AS value_pln, round(estimated_pln, 2) AS estimated_pln,
                round(price_to_estimate, 4) AS price_to_estimate
         FROM fact_lot

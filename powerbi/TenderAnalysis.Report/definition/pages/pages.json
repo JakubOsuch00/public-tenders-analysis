@@ -1,7 +1,10 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
   "pageOrder": [
-    "53a0082de1e9620170e0"
+    "overview",
+    "competition",
+    "price",
+    "opportunities"
   ],
-  "activePageName": "53a0082de1e9620170e0"
+  "activePageName": "overview"
 }

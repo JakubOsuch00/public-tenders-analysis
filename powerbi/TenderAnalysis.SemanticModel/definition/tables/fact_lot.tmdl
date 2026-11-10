@@ -147,6 +147,14 @@ table fact_lot
 
 		annotation SummarizationSetBy = Automatic
 
+	column offers_capped
+		dataType: int64
+		lineageTag: 73e1d3a6-bf82-4112-8965-3722b412cd24
+		summarizeBy: none
+		sourceColumn: offers_capped
+
+		annotation SummarizationSetBy = Automatic
+
 	column n_offers
 		dataType: int64
 		lineageTag: 0e549111-e7c9-44bb-9ee3-8c2cf8d399db
@@ -196,7 +204,7 @@ table fact_lot
 				let
 				    Source = Csv.Document(File.Contents(DataFolder & "fact_lot.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
 				    Headers = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
-				    Typed = Table.TransformColumnTypes(Headers, {{"lot_key", type text}, {"publication_number", type text}, {"publication_date", type date}, {"buyer_key", type text}, {"winner_key", type text}, {"cpv_division", type text}, {"cpv_group", type text}, {"nuts2", type text}, {"contract_nature", type text}, {"procedure_type", type text}, {"framework", type logical}, {"n_offers", Int64.Type}, {"single_offer", type logical}, {"value_pln", type number}, {"estimated_pln", type number}, {"price_to_estimate", type number}}, "en-US")
+				    Typed = Table.TransformColumnTypes(Headers, {{"lot_key", type text}, {"publication_number", type text}, {"publication_date", type date}, {"buyer_key", type text}, {"winner_key", type text}, {"cpv_division", type text}, {"cpv_group", type text}, {"nuts2", type text}, {"contract_nature", type text}, {"procedure_type", type text}, {"framework", type logical}, {"n_offers", Int64.Type}, {"offers_capped", Int64.Type}, {"single_offer", type logical}, {"value_pln", type number}, {"estimated_pln", type number}, {"price_to_estimate", type number}}, "en-US")
 				in
 				    Typed
 
